@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "test:zircon_ore",
+    "test:zircon_block",
+    "test:deepslate_zircon_ore"
+  ]
+}

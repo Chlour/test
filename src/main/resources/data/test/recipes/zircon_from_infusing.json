@@ -1,0 +1,15 @@
+{
+  "type": "test:gem_infusing",
+  "ingredients": [
+    {
+      "item": "test:raw_zircon"
+    }
+  ],
+  "fluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 500
+  },
+  "output": {
+    "item": "test:zircon"
+  }
+}
