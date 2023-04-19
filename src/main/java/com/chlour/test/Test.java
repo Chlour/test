@@ -1,5 +1,6 @@
 package com.chlour.test;
 
+import com.chlour.test.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.BlockItem;
@@ -37,6 +38,9 @@ public class Test {
 
     public Test() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modEventBus);
+
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
