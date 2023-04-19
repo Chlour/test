@@ -2,8 +2,11 @@ package com.chlour.test;
 
 import com.chlour.test.block.ModBlocks;
 import com.chlour.test.item.ModItems;
+import com.chlour.test.villager.ModVillagers;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -42,7 +45,7 @@ public class Test {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-
+        ModVillagers.register(modEventBus);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -52,8 +55,9 @@ public class Test {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+        event.enqueueWork(()->{
+            ModVillagers.registerPOIs();
+        });
     }
 
 
@@ -63,9 +67,9 @@ public class Test {
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+
             // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
         }
     }
 }
