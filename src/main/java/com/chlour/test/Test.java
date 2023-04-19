@@ -2,6 +2,7 @@ package com.chlour.test;
 
 import com.chlour.test.block.ModBlocks;
 import com.chlour.test.item.ModItems;
+import com.chlour.test.networking.ModMessages;
 import com.chlour.test.villager.ModVillagers;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -58,6 +59,8 @@ public class Test {
         event.enqueueWork(()->{
             ModVillagers.registerPOIs();
         });
+
+        ModMessages.register();
     }
 
 
