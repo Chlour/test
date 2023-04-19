@@ -1,6 +1,7 @@
 package com.chlour.test.networking.packet;
 
 import com.chlour.test.networking.ModMessages;
+import com.chlour.test.thirst.PlayerThirstProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -49,12 +50,29 @@ public class DrinkWaterC2SPacket {
 
                 // increase the water level / thirst level of player
                 // Output the current thirst level
+                player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst->{
+                    thirst.addThirst(1);
+                    player.sendSystemMessage(Component.literal("Current Thirst "+thirst.getThirst())
+                            .withStyle(ChatFormatting.AQUA));
+
+                    ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()),player);
+
+                });
+
 
 
             } else {
                 // Notify the player that there is no water around!
                 player.sendSystemMessage(Component.translatable(MESSAGE_NO_WATER).withStyle(ChatFormatting.RED));
                 // Output the current thirst level
+                player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst->{
+                    thirst.addThirst(1);
+                    player.sendSystemMessage(Component.literal("Current Thirst "+thirst.getThirst())
+                            .withStyle(ChatFormatting.AQUA));
+
+                    ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()),player);
+
+                });
             }
         });
         return true;
